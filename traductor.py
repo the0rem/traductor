@@ -1,3 +1,5 @@
+#! /usr/bin/env python
+
 import yaml
 import argparse
 
@@ -76,9 +78,3 @@ for file in args.files:
         # Add service to main services list.
         # If the service name already exists we will override
         services[service_name] = service_specs
-
-
-
-
-
-
