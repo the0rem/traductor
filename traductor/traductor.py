@@ -98,7 +98,6 @@ class Traductor(object):
 
             # Render systemd service file
             template_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), "templates/systemd.jinja2.service")
-            print('%s' % template_file)
             template = template_env.get_template(template_file)
             output_text = template.render(template_vars)
             print(output_text, file=open("%s.service" % service_name, "w"))
