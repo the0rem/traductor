@@ -9,4 +9,4 @@ class Ports(BaseTranslator):
         :param value:
         :return:
         """
-        return "-p %s" % (value,)
+        return "-p %s" % " -p ".join(value)
