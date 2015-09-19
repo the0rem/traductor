@@ -59,3 +59,26 @@ parser.add_argument(
 # Get cli arguments
 args = parser.parse_args()
 
+
+
+services = {}
+
+# Loop through given files
+for file in args.files:
+
+    # Load YAML into python
+    with open(file, 'r') as stream:
+        services_set = yaml.parse(stream)
+
+    # Loop through services from YAML file
+    for service_name, service_specs in services_set.iteritems():
+
+        # Add service to main services list.
+        # If the service name already exists we will override
+        services[service_name] = service_specs
+
+
+
+
+
+
