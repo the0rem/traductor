@@ -3,6 +3,8 @@
 import yaml
 import argparse
 
+from pydoc import locate
+
 from jinja2 import Template
 
 from . import translators
