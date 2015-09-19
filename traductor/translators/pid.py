@@ -1,4 +1,4 @@
-from .base import BaseTranslator
+from .traductor.translators.base import BaseTranslator
 
 class Pid(BaseTranslator):
     """
