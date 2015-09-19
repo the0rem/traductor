@@ -43,3 +43,19 @@ OPTIONS_CAPABILITIES = [
     "working_dir",
 ]
 
+# Setup cli handler
+parser = argparse.ArgumentParser(description="Translate docker-compose templates to process manage service files " \
+    "(systemd currently supported).")
+
+parser.add_argument(
+    ['-f', '--file'],
+    required=True,
+    help='Specify docker-compose files (default: docker-compose.yml)',
+    default='docker-compose.yml',
+    dest='files',
+    action='append',
+)
+
+# Get cli arguments
+args = parser.parse_args()
+
