@@ -1,6 +1,6 @@
-from .traductor.translators.base import BaseTranslator
+from traductor.translators.base import BaseTranslator
 
-class Links(BaseTranslator):
+class Labels(BaseTranslator):
     """
 
     """
@@ -9,4 +9,4 @@ class Links(BaseTranslator):
         :param value:
         :return:
         """
-        return "--link=[%s]" % ",".join(value)
+        return "--label=[%s]" % ",".join(value)

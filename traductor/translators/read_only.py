@@ -1,4 +1,4 @@
-from .traductor.translators.base import BaseTranslator
+from traductor.translators.base import BaseTranslator
 
 class ReadOnly(BaseTranslator):
     """
