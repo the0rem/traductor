@@ -84,7 +84,7 @@ class Traductor(object):
 
 
             # Build the systemd service file using Jinja2
-            template_loader = jinja2.FileSystemLoader(searchpath=os.getcwd())
+            template_loader = jinja2.FileSystemLoader(searchpath="/")
             template_env = jinja2.Environment(loader=template_loader)
             template_vars = {
                 "service": {
