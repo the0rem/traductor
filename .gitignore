@@ -3,3 +3,5 @@ bin
 include
 lib
 .idea
+/*.pyc
+*.egg-info
