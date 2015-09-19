@@ -21,7 +21,7 @@ if (sys.version_info[:2][0] < 3 and sys.version_info[:2][1] < 7) or (sys.version
 setup(
         name = "traductor",
         version = "0.0.1",
-        author = "Shaun Smekel",
+        author = "Chris Fordham, Shaun Smekel, Toby Harris",
         author_email = "foo@bar.suf",
         description = "docker compose to system service file",
         url = "https://github.com/the0rem/traductor",
