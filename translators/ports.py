@@ -1,0 +1,12 @@
+from .base import BaseTranslator
+
+class Ports(BaseTranslator):
+    """
+    Port Mapping
+    """
+    def translate(self, value):
+        """
+        :param value:
+        :return:
+        """
+        return "-p %s" % (value,)
