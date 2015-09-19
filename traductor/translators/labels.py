@@ -9,4 +9,9 @@ class Labels(BaseTranslator):
         :param value:
         :return:
         """
-        return "--label=[%s]" % ",".join(value)
+        labels = ""
+
+        for label_key, label_val in value.iteritems():
+            labels += " -l %s:%s" % (label_key, label_val,)
+
+        return "%s" % labels
