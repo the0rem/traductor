@@ -4,4 +4,9 @@ class Cpuset(BaseTranslator):
     """
 
     """
-    pass
+    def translate(self, value):
+        """
+        :param value:
+        :return:
+        """
+        return "--cpuset-cpus=%s" % value

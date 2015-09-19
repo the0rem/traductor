@@ -4,4 +4,9 @@ class MemLimit(BaseTranslator):
     """
 
     """
-    pass
+    def translate(self, value):
+        """
+        :param value:
+        :return:
+        """
+        return "--memory=%s" % value

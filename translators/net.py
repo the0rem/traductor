@@ -4,4 +4,9 @@ class Net(BaseTranslator):
     """
 
     """
-    pass
+    def translate(self, value):
+        """
+        :param value:
+        :return:
+        """
+        return "--net=%s" % value

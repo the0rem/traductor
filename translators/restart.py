@@ -4,4 +4,9 @@ class Restart(BaseTranslator):
     """
 
     """
-    pass
+    def translate(self, value):
+        """
+        :param value:
+        :return:
+        """
+        return "--restart=%s" % value

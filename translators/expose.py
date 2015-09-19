@@ -4,4 +4,9 @@ class Expose(BaseTranslator):
     """
 
     """
-    pass
+    def translate(self, value):
+        """
+        :param value:
+        :return:
+        """
+        return "--expose=[%s]" % ",".join(value)

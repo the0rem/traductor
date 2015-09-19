@@ -4,4 +4,9 @@ class ContainerName(BaseTranslator):
     """
 
     """
-    pass
+    def translate(self, value):
+        """
+        :param value:
+        :return:
+        """
+        return "--name=%s" % value

@@ -4,4 +4,9 @@ class VolumeDriver(BaseTranslator):
     """
 
     """
-    pass
+    def translate(self, value):
+        """
+        :param value:
+        :return:
+        """
+        return "--volume-driver=%s" % value

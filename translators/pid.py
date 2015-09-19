@@ -4,4 +4,9 @@ class Pid(BaseTranslator):
     """
 
     """
-    pass
+    def translate(self, value):
+        """
+        :param value:
+        :return:
+        """
+        return "--pid=%s" % value

@@ -4,4 +4,9 @@ class CapAdd(BaseTranslator):
     """
 
     """
-    pass
+    def translate(self, value):
+        """
+        :param value:
+        :return:
+        """
+        return "--cap-add=[%s]" % ",".join(value)

@@ -4,4 +4,9 @@ class MacAddress(BaseTranslator):
     """
 
     """
-    pass
+    def translate(self, value):
+        """
+        :param value:
+        :return:
+        """
+        return "--mac-address=%s" % value

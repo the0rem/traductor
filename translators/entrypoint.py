@@ -4,4 +4,9 @@ class Entrypoint(BaseTranslator):
     """
 
     """
-    pass
+    def translate(self, value):
+        """
+        :param value:
+        :return:
+        """
+        return "--entrypoint=%s" % value

@@ -4,4 +4,9 @@ class StdinOpen(BaseTranslator):
     """
 
     """
-    pass
+    def translate(self, value):
+        """
+        :param value:
+        :return:
+        """
+        return "-i"

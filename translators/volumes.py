@@ -4,4 +4,9 @@ class Volumes(BaseTranslator):
     """
 
     """
-    pass
+    def translate(self, value):
+        """
+        :param value:
+        :return:
+        """
+        return "-v %s" % " -v ".join(value)

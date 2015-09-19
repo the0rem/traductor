@@ -4,4 +4,9 @@ class ReadOnly(BaseTranslator):
     """
 
     """
-    pass
+    def translate(self, value):
+        """
+        :param value:
+        :return:
+        """
+        return "--read-only=%s" % value

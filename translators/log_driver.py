@@ -4,4 +4,9 @@ class LogDriver(BaseTranslator):
     """
 
     """
-    pass
+    def translate(self, value):
+        """
+        :param value:
+        :return:
+        """
+        return "--log-driver=%s" % value

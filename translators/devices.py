@@ -4,4 +4,9 @@ class Devices(BaseTranslator):
     """
 
     """
-    pass
+    def translate(self, value):
+        """
+        :param value:
+        :return:
+        """
+        return "--device=[%s]" % ",".join(value)

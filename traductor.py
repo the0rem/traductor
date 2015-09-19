@@ -15,7 +15,6 @@ from exceptions import AttributeError
 OPTIONS_CAPABILITIES = [
     "cap_add",
     "cap_drop",
-    "command",
     "container_name",
     "cpu_shares",
     "cpuset",

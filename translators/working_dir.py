@@ -4,4 +4,9 @@ class WorkingDir(BaseTranslator):
     """
 
     """
-    pass
+    def translate(self, value):
+        """
+        :param value:
+        :return:
+        """
+        return "-w %s" % value
