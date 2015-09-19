@@ -1,14 +1,15 @@
 #! /usr/bin/env python
 
+from __future__ import print_function
+
 import os
+import sys
 import yaml
 import jinja2
-import logging
 import argparse
 import importlib
 
 from exceptions import AttributeError
-
 
 # List of supported docker-compose commands
 OPTIONS_CAPABILITIES = [
