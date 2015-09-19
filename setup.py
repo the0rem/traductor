@@ -31,6 +31,7 @@ setup(
             ]
         },
         packages = find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
+        package_data = {'': ['templates/*.service', 'examples/*.yaml']},
         include_package_data = True,
         install_requires = ['PyYAML', 'Jinja2', 'six'] + opt_requires,
         test_suite = 'tests',
