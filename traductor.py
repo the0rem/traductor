@@ -53,12 +53,11 @@ parser = argparse.ArgumentParser(description="Translate docker-compose templates
     "(systemd currently supported).")
 
 parser.add_argument(
-    ['-f', '--file'],
-    required=True,
+    '-f',
+    '--file',
+    dest='file',
     help='Specify docker-compose files (default: docker-compose.yml)',
     default='docker-compose.yml',
-    dest='files',
-    action='append',
 )
 
 # Get cli arguments
@@ -78,8 +77,10 @@ def underscore_to_camelcase(value):
 
 docker_services = {}
 
+files = [args.file]
+
 # Loop through given files
-for file in args.files:
+for file in files:
 
     # Load YAML into python
     with open(file, 'r') as stream:
