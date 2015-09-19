@@ -27,7 +27,7 @@ setup(
         url = "https://github.com/the0rem/traductor",
         entry_points = {
             'console_scripts': [
-                'traductor = traductor',
+                'traductor = traductor.traductor:Cli',
             ]
         },
         packages = find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
