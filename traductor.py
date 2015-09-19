@@ -152,4 +152,3 @@ for service_name, service_specs in docker_services.iteritems():
     output_text = template.render(template_vars)
     print(output_text, file=open("%s.service" % service_name, "w"))
     print(output_text)
-
