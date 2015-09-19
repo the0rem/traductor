@@ -65,6 +65,9 @@ args = parser.parse_args()
 
 
 def underscore_to_camelcase(value):
+    """
+    Translate a snake_case to CamelCase
+    """
     def upperfirst(x):
         return x[0].upper() + x[1:]
     def camelcase():
@@ -84,7 +87,9 @@ for file in files:
 
     # Load YAML into python
     with open(file, 'r') as stream:
-        services_set = yaml.parse(stream)
+        services_set = yaml.load(stream)
+
+    print('%s' % services_set)
 
     # Loop through services from YAML file
     for service_name, service_specs in services_set.iteritems():
@@ -94,10 +99,10 @@ for file in files:
         docker_services[service_name] = service_specs
 
 
-for service_name, service_specs in docker_services:
+for service_name, service_specs in docker_services.iteritems():
 
-    options = ""
     image = ""
+    options = ""
     command = ""
 
     service_name_camelcase = underscore_to_camelcase(service_name)
