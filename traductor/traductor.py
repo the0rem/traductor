@@ -34,6 +34,20 @@ class Traductor(object):
         """
 
         """
+        docker_services = self._parse_yaml_from_files(files)
+
+        for service_name, service_specs in docker_services.iteritems():
+
+            template_vars = self._translate_to_run_template_vars(service_name=service_name, service_specs=service_specs)
+            generated_template = self._generate_service(service_name=service_name, template_vars=template_vars)
+
+            print(generated_template)
+
+
+    def _parse_yaml_from_files(self, files):
+        """
+
+        """
         docker_services = {}
 
         # Loop through given files
@@ -50,58 +64,72 @@ class Traductor(object):
                 # If the service name already exists we will override
                 docker_services[service_name] = service_specs
 
-
-        for service_name, service_specs in docker_services.iteritems():
-
-            image = ""
-            options = ""
-            command = ""
-
-            # Save image and remove from service specs
-            if "image" in service_specs:
-                image = service_specs["image"]
-                del service_specs["image"]
+        return docker_services
 
 
-            # Get the run command if specified
-            if "command" in service_specs:
-                command = service_specs["command"]
-                del service_specs["command"]
+    def _translate_to_run_template_vars(self, service_name, service_specs):
+        """
 
-            for attr_name, attr_value in service_specs.iteritems():
+        """
+        image = ""
+        options = ""
+        command = ""
 
-                translator = None
-
-                try:
-                    module = importlib.import_module('traductor.translators.%s' % attr_name)
-                    translator = getattr(module, self.underscore_to_camelcase(attr_name))
-                    translator = translator()
-                except AttributeError:
-                    continue
-
-                # Add returned string to docker run options
-                options = "%s %s" % (options, translator.translate(attr_value),)
+        # Save image and remove from service specs
+        if "image" in service_specs:
+            image = service_specs["image"]
+            del service_specs["image"]
 
 
-            # Build the systemd service file using Jinja2
-            template_loader = jinja2.FileSystemLoader(searchpath="/")
-            template_env = jinja2.Environment(loader=template_loader)
-            template_vars = {
-                "service": {
-                    "name": image,
-                    "description": "% service" % self.underscore_to_camelcase(service_name),
-                    "image": image,
-                    "options": options,
-                    "command": command,
-                }
+        # Get the run command if specified
+        if "command" in service_specs:
+            command = service_specs["command"]
+            del service_specs["command"]
+
+        for attr_name, attr_value in service_specs.iteritems():
+
+            translator = None
+
+            try:
+                module = importlib.import_module('traductor.translators.%s' % attr_name)
+                translator = getattr(module, self.underscore_to_camelcase(attr_name))
+                translator = translator()
+            except AttributeError:
+                print("The docker-compose command \"%s\" is either not valid or is not " +
+                      "supported as a run command" % attr_name)
+                continue
+
+            # Add returned string to docker run options
+            options = "%s %s" % (options, translator.translate(attr_value),)
+
+        return {
+            "service": {
+                "name": self.underscore_to_camelcase(service_name),
+                "description": "% service" % self.underscore_to_camelcase(service_name),
+                "image": image,
+                "options": options,
+                "command": command,
             }
+        }
 
-            # Render systemd service file
-            template_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), "templates/systemd.jinja2.service")
-            template = template_env.get_template(template_file)
-            output_text = template.render(template_vars)
-            print(output_text, file=open("%s.service" % service_name, "w"))
-            print(output_text)
+
+    def _generate_service(self, service_name, template_vars):
+        """
+
+        """
+        # Build the systemd service file using Jinja2
+        template_loader = jinja2.FileSystemLoader(searchpath="/")
+        template_env = jinja2.Environment(loader=template_loader)
+
+        # Render systemd service file
+        template_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), "templates/systemd.jinja2.service")
+        template = template_env.get_template(template_file)
+        output_text = template.render(template_vars)
+
+        # Use print to send generated template to file
+        print(output_text, file=open("%s.service" % service_name, "w"))
+
+        return output_text
 
 
 class Cli(object):
@@ -109,9 +137,12 @@ class Cli(object):
     Cli handler
     """
     def __init__(self):
+        """
+        Initialise Cli
+        """
         # Setup cli handler
-        parser = argparse.ArgumentParser(description="Translate docker-compose templates to process manage service files " \
-            "(systemd currently supported).")
+        parser = argparse.ArgumentParser(description="Translate docker-compose templates to process" +
+                                                     " manage service files (systemd currently supported).")
 
         parser.add_argument(
             '-f',
