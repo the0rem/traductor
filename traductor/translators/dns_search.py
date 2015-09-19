@@ -9,4 +9,9 @@ class DnsSearch(BaseTranslator):
         :param value:
         :return:
         """
-        return "--dns-search=[%s]" % " -p ".join(value)
+        if type(value) is not list:
+            if not value:
+                return ""
+            value = [value]
+
+        return "--dns-search=[%s]" % ",".join(value)

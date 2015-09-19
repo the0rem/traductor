@@ -9,4 +9,7 @@ class Pid(BaseTranslator):
         :param value:
         :return:
         """
+        if not value:
+            return ""
+
         return "--pid=%s" % value

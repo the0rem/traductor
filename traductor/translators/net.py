@@ -9,4 +9,7 @@ class Net(BaseTranslator):
         :param value:
         :return:
         """
+        if not value:
+            return ""
+
         return "--net=%s" % value

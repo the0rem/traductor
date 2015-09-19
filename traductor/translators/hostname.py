@@ -9,4 +9,7 @@ class Hostname(BaseTranslator):
         :param value:
         :return:
         """
+        if not value:
+            return ""
+
         return "--hostname=%s" % value

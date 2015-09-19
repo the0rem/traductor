@@ -9,4 +9,7 @@ class Entrypoint(BaseTranslator):
         :param value:
         :return:
         """
+        if not value:
+            return ""
+
         return "--entrypoint=%s" % value

@@ -9,4 +9,7 @@ class MacAddress(BaseTranslator):
         :param value:
         :return:
         """
+        if not value:
+            return ""
+
         return "--mac-address=%s" % value

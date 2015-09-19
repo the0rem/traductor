@@ -9,4 +9,9 @@ class EnvFile(BaseTranslator):
         :param value:
         :return:
         """
+        if type(value) is not list:
+            if not value:
+                return ""
+            value = [value]
+
         return "--env-file=[%s]" % ",".join(value)

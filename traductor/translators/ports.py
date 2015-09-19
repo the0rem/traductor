@@ -9,4 +9,7 @@ class Ports(BaseTranslator):
         :param value:
         :return:
         """
-        return "-p %s" % " -p ".join(value)
+        if type(value) is not list:
+            return ""
+
+        return "--publish=[%s]" % ",".join(value)

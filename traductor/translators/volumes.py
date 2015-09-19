@@ -9,4 +9,7 @@ class Volumes(BaseTranslator):
         :param value:
         :return:
         """
-        return "-v %s" % " -v ".join(value)
+        if type(value) is not list:
+            return ""
+
+        return "--volume=[%s]" % ",".join(value)

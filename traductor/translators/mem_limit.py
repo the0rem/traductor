@@ -9,4 +9,7 @@ class MemLimit(BaseTranslator):
         :param value:
         :return:
         """
+        if not value:
+            return ""
+
         return "--memory=%s" % value

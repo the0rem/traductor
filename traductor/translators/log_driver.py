@@ -9,4 +9,7 @@ class LogDriver(BaseTranslator):
         :param value:
         :return:
         """
+        if not value:
+            return ""
+
         return "--log-driver=%s" % value

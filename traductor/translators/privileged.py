@@ -9,4 +9,7 @@ class Privileged(BaseTranslator):
         :param value:
         :return:
         """
+        if not value:
+            return ""
+
         return "--privileged=%s" % value

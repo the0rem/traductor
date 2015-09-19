@@ -9,4 +9,9 @@ class Dns(BaseTranslator):
         :param value:
         :return:
         """
-        return "--dns=[%s]" % " -p ".join(value)
+        if type(value) is not list:
+            if not value:
+                return ""
+            value = [value]
+
+        return "--dns=[%s]" % ",".join(value)

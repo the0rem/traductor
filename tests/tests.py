@@ -1,5 +1,5 @@
 import unittest
-from . import traductor
+from traductor import traductor
 
 def helloWorld(input):
 	return "Hello, " + input + "!"

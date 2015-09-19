@@ -9,4 +9,7 @@ class CapDrop(BaseTranslator):
         :param value:
         :return:
         """
+        if type(value) is not list:
+            return ""
+
         return "--cap-drop=[%s]" % ",".join(value)

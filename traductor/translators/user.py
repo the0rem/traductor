@@ -9,4 +9,7 @@ class User(BaseTranslator):
         :param value:
         :return:
         """
+        if not value:
+            return ""
+
         return "-u %s" % value

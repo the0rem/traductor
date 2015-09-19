@@ -9,4 +9,7 @@ class CpuShares(BaseTranslator):
         :param value:
         :return:
         """
+        if not value:
+            return ""
+
         return "--cpu-shares=%s" % value

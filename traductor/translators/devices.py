@@ -9,4 +9,7 @@ class Devices(BaseTranslator):
         :param value:
         :return:
         """
+        if type(value) is not list:
+            return ""
+
         return "--device=[%s]" % ",".join(value)

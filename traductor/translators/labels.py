@@ -9,6 +9,9 @@ class Labels(BaseTranslator):
         :param value:
         :return:
         """
+        if type(value) is not dict:
+            return ""
+
         labels = ""
 
         for label_key, label_val in value.iteritems():

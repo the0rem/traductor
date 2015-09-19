@@ -9,4 +9,7 @@ class Expose(BaseTranslator):
         :param value:
         :return:
         """
+        if type(value) is not list:
+            return ""
+
         return "--expose=[%s]" % ",".join(value)

@@ -9,4 +9,7 @@ class Restart(BaseTranslator):
         :param value:
         :return:
         """
+        if not value:
+            return ""
+
         return "--restart=%s" % value

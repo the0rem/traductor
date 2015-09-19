@@ -9,4 +9,7 @@ class CapAdd(BaseTranslator):
         :param value:
         :return:
         """
+        if type(value) is not list:
+            return ""
+
         return "--cap-add=[%s]" % ",".join(value)

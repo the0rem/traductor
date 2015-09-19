@@ -9,4 +9,7 @@ class MemswapLimit(BaseTranslator):
         :param value:
         :return:
         """
+        if not value:
+            return ""
+
         return "--memory-swap=%s" % value

@@ -9,4 +9,7 @@ class Cpuset(BaseTranslator):
         :param value:
         :return:
         """
+        if not value:
+            return ""
+
         return "--cpuset-cpus=%s" % value

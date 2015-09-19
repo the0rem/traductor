@@ -9,4 +9,7 @@ class ReadOnly(BaseTranslator):
         :param value:
         :return:
         """
+        if not value:
+            return ""
+
         return "--read-only=%s" % value

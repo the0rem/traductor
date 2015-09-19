@@ -9,4 +9,7 @@ class WorkingDir(BaseTranslator):
         :param value:
         :return:
         """
+        if not value:
+            return ""
+
         return "-w %s" % value

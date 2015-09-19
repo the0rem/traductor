@@ -9,4 +9,7 @@ class ContainerName(BaseTranslator):
         :param value:
         :return:
         """
+        if not value:
+            return ""
+
         return "--name=%s" % value

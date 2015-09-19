@@ -9,4 +9,7 @@ class Links(BaseTranslator):
         :param value:
         :return:
         """
+        if type(value) is not list:
+            return ""
+
         return "--link=[%s]" % ",".join(value)
