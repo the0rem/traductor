@@ -16,3 +16,9 @@ v2
 - Docker Composer does not support all the same arguments Docker Run does
 - Templated Input
 
+## Usage
+
+### Build and Install
+
+    $ python setup.py sdist
+    # pip install dist/*.tar.gz
