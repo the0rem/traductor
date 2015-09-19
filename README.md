@@ -1,5 +1,7 @@
 # traductor
 
+## Test
+python -m unittest discover tests -v
 
 ##Notes:
 v1
