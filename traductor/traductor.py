@@ -73,14 +73,14 @@ class Traductor(object):
                 translator = None
 
                 try:
-                    module = importlib.import_module('traductor.translators')
-                    translator = getattr(module, attr_name)
+                    module = importlib.import_module('traductor.translators.%s' % attr_name)
+                    translator = getattr(module, self.underscore_to_camelcase(attr_name))
                     translator = translator()
                 except AttributeError:
                     continue
 
                 # Add returned string to docker run options
-                options += " %s" % translator.translate(attr_value)
+                options = "%s %s" % (options, translator.translate(attr_value),)
 
 
             # Build the systemd service file using Jinja2
