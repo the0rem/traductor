@@ -12,4 +12,4 @@ class User(BaseTranslator):
         if not value:
             return ""
 
-        return "-u %s" % value
+        return "--user=%s" % value

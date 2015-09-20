@@ -12,4 +12,4 @@ class WorkingDir(BaseTranslator):
         if not value:
             return ""
 
-        return "-w %s" % value
+        return "--workdir=%s" % value

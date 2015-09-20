@@ -12,4 +12,4 @@ class Tty(BaseTranslator):
         if not value:
             return ""
 
-        return "-t"
+        return "--tty=%s" % value

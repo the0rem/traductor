@@ -555,8 +555,13 @@ class TestPorts(unittest.TestCase):
 
     def test_coversion(self):
 
-        input=""
-        expected_output=""
+        input=[
+            "3000",
+            "8000:8000",
+            "49100:22",
+            "127.0.0.1:8001:8001",
+        ]
+        expected_output="--publish=[3000,8000:8000,49100:22,127.0.0.1:8001:8001]"
 
         output=ports.Ports().translate(input)
 
@@ -577,8 +582,8 @@ class TestPrivileged(unittest.TestCase):
 
     def test_coversion(self):
 
-        input=""
-        expected_output=""
+        input="true"
+        expected_output="--privileged=true"
 
         output=privileged.Privileged().translate(input)
 
@@ -599,8 +604,8 @@ class TestReadOnly(unittest.TestCase):
 
     def test_coversion(self):
 
-        input=""
-        expected_output=""
+        input="true"
+        expected_output="--read-only=true"
 
         output=read_only.ReadOnly().translate(input)
 
@@ -621,8 +626,8 @@ class TestRestart(unittest.TestCase):
 
     def test_coversion(self):
 
-        input=""
-        expected_output=""
+        input="always"
+        expected_output="--restart=always"
 
         output=restart.Restart().translate(input)
 
@@ -643,8 +648,8 @@ class TestStdinOpen(unittest.TestCase):
 
     def test_coversion(self):
 
-        input=""
-        expected_output=""
+        input="true"
+        expected_output="--interactive=true"
 
         output=stdin_open.StdinOpen().translate(input)
 
@@ -665,8 +670,8 @@ class TestTty(unittest.TestCase):
 
     def test_coversion(self):
 
-        input=""
-        expected_output=""
+        input="true"
+        expected_output="--tty=true"
 
         output=tty.Tty().translate(input)
 
@@ -686,8 +691,8 @@ class TestUser(unittest.TestCase):
 
     def test_coversion(self):
 
-        input=""
-        expected_output=""
+        input="postgresql:datastore"
+        expected_output="--user=postgresql:datastore"
 
         output=user.User().translate(input)
 
@@ -707,8 +712,8 @@ class TestVolumeDriver(unittest.TestCase):
 
     def test_coversion(self):
 
-        input=""
-        expected_output=""
+        input="mydriver"
+        expected_output="--volume-driver=mydriver"
 
         output=volume_driver.VolumeDriver().translate(input)
 
@@ -728,8 +733,12 @@ class TestVolumes(unittest.TestCase):
 
     def test_coversion(self):
 
-        input=""
-        expected_output=""
+        input=[
+            "/var/lib/mysql",
+            "./cache:/tmp/cache",
+            "~/configs:/etc/configs/:ro",
+        ]
+        expected_output="--volume=[/var/lib/mysql,./cache:/tmp/cache,~/configs:/etc/configs/:ro]"
 
         output=volumes.Volumes().translate(input)
 
@@ -749,8 +758,8 @@ class TestVolumesFrom(unittest.TestCase):
 
     def test_coversion(self):
 
-        input=""
-        expected_output=""
+        input=["service_name", "container_name"]
+        expected_output="--volumes-from=[service_name,container_name]"
 
         output=volumes_from.VolumesFrom().translate(input)
 
@@ -770,8 +779,8 @@ class TestWorkingDir(unittest.TestCase):
 
     def test_coversion(self):
 
-        input=""
-        expected_output=""
+        input="/code"
+        expected_output="--workdir=/code"
 
         output=working_dir.WorkingDir().translate(input)
 

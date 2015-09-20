@@ -12,4 +12,4 @@ class StdinOpen(BaseTranslator):
         if not value:
             return ""
 
-        return "-i"
+        return "--interactive=%s" % value
