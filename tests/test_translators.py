@@ -1,3 +1,4 @@
+import collections
 import unittest
 from traductor.translators import (cap_add, cap_drop, container_name, cpu_shares, cpuset, devices,
     dns, dns_search, domainname, entrypoint, env_file, environment, expose, hostname, labels, links,
@@ -312,8 +313,8 @@ class TestExpose(unittest.TestCase):
 
     def test_coversion(self):
 
-        input=""
-        expected_output=""
+        input=["3000", "8000"]
+        expected_output="--expose=[3000,8000]"
 
         output=expose.Expose().translate(input)
 
@@ -334,8 +335,8 @@ class TestHostname(unittest.TestCase):
 
     def test_coversion(self):
 
-        input=""
-        expected_output=""
+        input="foo"
+        expected_output="--hostname=foo"
 
         output=hostname.Hostname().translate(input)
 
@@ -354,10 +355,32 @@ class TestHostname(unittest.TestCase):
 
 class TestLabels(unittest.TestCase):
 
-    def test_coversion(self):
+    def test_coversion_with_dict(self):
 
-        input=""
-        expected_output=""
+        input={
+            "com.example.description": "Accounting webapp",
+            "com.example.department": "Finance",
+            "com.example.label-with-empty-value": "",
+        }
+        expected_output="--label=[com.example.description:Accounting webapp," \
+                        "com.example.department:Finance,com.example.label-with-empty-value:]"
+
+        output=labels.Labels().translate(input)
+
+        print("Output is %s" % output)
+        print("Output expected is %s" % expected_output)
+
+        self.assertItemsEqual(output, expected_output)
+
+    def test_coversion_with_list(self):
+
+        input=[
+            "com.example.description=Accounting webapp",
+            "com.example.department=Finance",
+            "com.example.label-with-empty-value",
+        ]
+        expected_output="--label=[com.example.description:Accounting webapp," \
+                        "com.example.department:Finance,com.example.label-with-empty-value:]"
 
         output=labels.Labels().translate(input)
 
@@ -378,8 +401,8 @@ class TestLinks(unittest.TestCase):
 
     def test_coversion(self):
 
-        input=""
-        expected_output=""
+        input=["db", "db:database", "redis"]
+        expected_output="--link=[db,db:database,redis]"
 
         output=links.Links().translate(input)
 
@@ -400,8 +423,8 @@ class TestLogDriver(unittest.TestCase):
 
     def test_coversion(self):
 
-        input=""
-        expected_output=""
+        input="json-file"
+        expected_output="--log-driver=json-file"
 
         output=log_driver.LogDriver().translate(input)
 
@@ -422,8 +445,8 @@ class TestMacAddress(unittest.TestCase):
 
     def test_coversion(self):
 
-        input=""
-        expected_output=""
+        input="02:42:ac:11:65:43"
+        expected_output="--mac-address=02:42:ac:11:65:43"
 
         output=mac_address.MacAddress().translate(input)
 
@@ -444,8 +467,8 @@ class TestMemLimit(unittest.TestCase):
 
     def test_coversion(self):
 
-        input=""
-        expected_output=""
+        input="1000000000"
+        expected_output="--memory=1000000000"
 
         output=mem_limit.MemLimit().translate(input)
 
@@ -466,8 +489,8 @@ class TestMemswapLimit(unittest.TestCase):
 
     def test_coversion(self):
 
-        input=""
-        expected_output=""
+        input="2000000000"
+        expected_output="--memory-swap=2000000000"
 
         output=memswap_limit.MemswapLimit().translate(input)
 
@@ -488,8 +511,8 @@ class TestNet(unittest.TestCase):
 
     def test_coversion(self):
 
-        input=""
-        expected_output=""
+        input="host"
+        expected_output="--net=host"
 
         output=net.Net().translate(input)
 
@@ -510,8 +533,8 @@ class TestPid(unittest.TestCase):
 
     def test_coversion(self):
 
-        input=""
-        expected_output=""
+        input="host"
+        expected_output="--pid=host"
 
         output=pid.Pid().translate(input)
 

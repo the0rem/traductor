@@ -9,12 +9,22 @@ class Labels(BaseTranslator):
         :param value:
         :return:
         """
-        if type(value) is not dict:
+        if type(value) is not dict and type(value) is not list:
             return ""
 
-        labels = ""
+        labels = []
 
-        for label_key, label_val in value.iteritems():
-            labels += " -l %s:%s" % (label_key, label_val,)
+        if type(value) is dict:
+            for env_key, env_val in value.iteritems():
+                labels.append("%s:%s" % (env_key, env_val,))
 
-        return "%s" % labels
+        if type(value) is list:
+            for label in value:
+                if "=" not in label:
+                    label = "%s=" % label
+
+                print("I is adding %s" % label)
+                labels.append(label.replace("=", ":"))
+
+        print("I is list%s" % labels)
+        return "--label=[%s]" % ",".join(labels)
