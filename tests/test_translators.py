@@ -367,9 +367,6 @@ class TestLabels(unittest.TestCase):
 
         output=labels.Labels().translate(input)
 
-        print("Output is %s" % output)
-        print("Output expected is %s" % expected_output)
-
         self.assertItemsEqual(output, expected_output)
 
     def test_coversion_with_list(self):

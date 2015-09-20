@@ -23,8 +23,6 @@ class Labels(BaseTranslator):
                 if "=" not in label:
                     label = "%s=" % label
 
-                print("I is adding %s" % label)
                 labels.append(label.replace("=", ":"))
 
-        print("I is list%s" % labels)
         return "--label=[%s]" % ",".join(labels)
