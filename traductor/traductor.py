@@ -9,9 +9,6 @@ import jinja2
 import argparse
 import importlib
 
-from exceptions import AttributeError
-
-
 class Traductor(object):
     """
     Handles logic for translating docker-compose yaml files to systemd services
