@@ -22,8 +22,8 @@ v2
 - RPM generation
 
 ## Requirements
-To run the systemd service files you will need to install [systemd-docker](https://github.com/ibuildthecloud/systemd-docker). This is a wrapper around docker which solves the following quirks running docker containers under systemd:
-> systemd does not actually supervise the Docker container but instead the Docker client. This makes systemd incapable of reliably managing Docker containers without hitting a bunch of really odd situations.
+To run the systemd service files you will need to install [systemd-docker](https://github.com/ibuildthecloud/systemd-docker). This is a wrapper around docker which solves the following problem of running docker containers under systemd:
+> Systemd does not actually supervise the Docker container but instead the Docker client. This makes systemd incapable of reliably managing Docker containers without hitting a bunch of really odd situations.
 
 ## Constraints
 - Docker Compose does not support all the same arguments Docker run does
