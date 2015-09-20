@@ -2,6 +2,9 @@
 
 A translator for docker-compose YAML files into process manager launch files (systemd supported so far).
 
+This helps support running docker containers as services under the OS' process manager (such as systemd).
+This can extend into being able to package docker containers as rpms for install.
+
 ##Features:
 v1
 - Responsability of operator to make sure services don't clash
@@ -16,6 +19,7 @@ v2
 - Inject systemd files into the container
 - Templated input
 - Support for generating service files for other process managers
+- RPM generation
 
 ## Requirements
 [Systemd-docker](https://github.com/ibuildthecloud/systemd-docker)
