@@ -282,7 +282,7 @@ class TestEnvironment(unittest.TestCase):
             "RACK_ENV": "development",
             "SESSION_SECRET": "",
         }
-        expected_output="-e RACK_ENV:development -e SESSION_SECRET:"
+        expected_output="--env=[RACK_ENV:development,SESSION_SECRET:]"
 
         output=environment.Environment().translate(input)
 
@@ -291,7 +291,7 @@ class TestEnvironment(unittest.TestCase):
     def test_coversion_with_list(self):
 
         input=["RACK_ENV=development", "SESSION_SECRET"]
-        expected_output="-e RACK_ENV:development -e SESSION_SECRET:"
+        expected_output="--env=[RACK_ENV:development,SESSION_SECRET:]"
 
         output=environment.Environment().translate(input)
 
