@@ -1,8 +1,5 @@
 # traductor
 
-## Test
-python -m unittest discover tests -v
-
 ##Notes:
 v1
 - Responsability of operator to make sure services don't clash
@@ -24,3 +21,7 @@ v2
 
     $ python setup.py sdist
     # pip install dist/*.tar.gz
+
+### Test
+		
+		python -m unittest discover tests -v
