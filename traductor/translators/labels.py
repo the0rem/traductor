@@ -26,4 +26,4 @@ class Labels(BaseTranslator):
 
                 labels.append(label.replace("=", ":"))
 
-        return "--label=[%s]" % ",".join(labels)
+        return "--label=%s" % " --label=".join(labels)

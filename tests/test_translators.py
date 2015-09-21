@@ -11,7 +11,7 @@ class TestCapAdd(unittest.TestCase):
     def test_coversion(self):
 
         input=["ALL"]
-        expected_output="--cap-add=[ALL]"
+        expected_output="--cap-add=ALL"
 
         output=cap_add.CapAdd().translate(input)
 
@@ -33,7 +33,7 @@ class TestCapDrop(unittest.TestCase):
     def test_coversion(self):
 
         input=["NET_ADMIN", "SYS_ADMIN"]
-        expected_output="--cap-drop=[NET_ADMIN,SYS_ADMIN]"
+        expected_output="--cap-drop=NET_ADMIN --cap-drop=SYS_ADMIN"
 
         output=cap_drop.CapDrop().translate(input)
 
@@ -121,7 +121,7 @@ class TestDevices(unittest.TestCase):
     def test_coversion(self):
 
         input=["/dev/ttyUSB0:/dev/ttyUSB0", "/dev/ttyUSB1:/dev/ttyUSB1"]
-        expected_output="--device=[/dev/ttyUSB0:/dev/ttyUSB0,/dev/ttyUSB1:/dev/ttyUSB1]"
+        expected_output="--device=/dev/ttyUSB0:/dev/ttyUSB0 --device=/dev/ttyUSB1:/dev/ttyUSB1"
 
         output=devices.Devices().translate(input)
 
@@ -143,7 +143,7 @@ class TestDns(unittest.TestCase):
     def test_coversion_with_string(self):
 
         input="8.8.8.8"
-        expected_output="--dns=[8.8.8.8]"
+        expected_output="--dns=8.8.8.8"
 
         output=dns.Dns().translate(input)
 
@@ -152,7 +152,7 @@ class TestDns(unittest.TestCase):
     def test_coversion_with_list(self):
 
         input=["8.8.8.8", "8.8.4.4"]
-        expected_output="--dns=[8.8.8.8,8.8.4.4]"
+        expected_output="--dns=8.8.8.8 --dns=8.8.4.4"
 
         output=dns.Dns().translate(input)
 
@@ -174,7 +174,7 @@ class TestDnsSearch(unittest.TestCase):
     def test_coversion_with_string(self):
 
         input="8.8.8.8"
-        expected_output="--dns-search=[8.8.8.8]"
+        expected_output="--dns-search=8.8.8.8"
 
         output=dns_search.DnsSearch().translate(input)
 
@@ -183,7 +183,7 @@ class TestDnsSearch(unittest.TestCase):
     def test_coversion_with_list(self):
 
         input=["8.8.8.8", "8.8.4.4"]
-        expected_output="--dns-search=[8.8.8.8,8.8.4.4]"
+        expected_output="--dns-search=8.8.8.8 --dns-search=8.8.4.4"
 
         output=dns_search.DnsSearch().translate(input)
 
@@ -197,29 +197,6 @@ class TestDnsSearch(unittest.TestCase):
         output=dns_search.DnsSearch().translate(input)
 
         self.assertEqual(output, expected_output)
-
-
-
-# class TestDomainname(unittest.TestCase):
-#
-#     def test_coversion(self):
-#
-#         input=""
-#         expected_output=""
-#
-#         output=domainname.Domainname().translate(input)
-#
-#         self.assertEqual(output, expected_output)
-#
-#     def test_coversion_fail(self):
-#
-#         input=""
-#         expected_output=""
-#
-#         output=domainname.Domainname().translate(input)
-#
-#         self.assertEqual(output, expected_output)
-
 
 
 class TestEntrypoint(unittest.TestCase):
@@ -249,7 +226,7 @@ class TestEnvFile(unittest.TestCase):
     def test_coversion_with_string(self):
 
         input=".env"
-        expected_output="--env-file=[.env]"
+        expected_output="--env-file=.env"
 
         output=env_file.EnvFile().translate(input)
 
@@ -258,7 +235,7 @@ class TestEnvFile(unittest.TestCase):
     def test_coversion_with_list(self):
 
         input=["./common.env", "./apps/web.env"]
-        expected_output="--env-file=[./common.env,./apps/web.env]"
+        expected_output="--env-file=./common.env --env-file=./apps/web.env"
 
         output=env_file.EnvFile().translate(input)
 
@@ -283,7 +260,7 @@ class TestEnvironment(unittest.TestCase):
             "RACK_ENV": "development",
             "SESSION_SECRET": "",
         }
-        expected_output="--env=[RACK_ENV:development,SESSION_SECRET:]"
+        expected_output="--env=RACK_ENV:development --env=SESSION_SECRET:"
 
         output=environment.Environment().translate(input)
 
@@ -292,7 +269,7 @@ class TestEnvironment(unittest.TestCase):
     def test_coversion_with_list(self):
 
         input=["RACK_ENV=development", "SESSION_SECRET"]
-        expected_output="--env=[RACK_ENV:development,SESSION_SECRET:]"
+        expected_output="--env=RACK_ENV:development --env=SESSION_SECRET:"
 
         output=environment.Environment().translate(input)
 
@@ -314,7 +291,7 @@ class TestExpose(unittest.TestCase):
     def test_coversion(self):
 
         input=["3000", "8000"]
-        expected_output="--expose=[3000,8000]"
+        expected_output="--expose=3000 --expose=8000"
 
         output=expose.Expose().translate(input)
 
@@ -362,8 +339,8 @@ class TestLabels(unittest.TestCase):
             "com.example.department": "Finance",
             "com.example.label-with-empty-value": "",
         }
-        expected_output="--label=[com.example.description:Accounting webapp," \
-                        "com.example.department:Finance,com.example.label-with-empty-value:]"
+        expected_output="--label=com.example.description:Accounting webapp " \
+                        "--label=com.example.department:Finance --label=com.example.label-with-empty-value:"
 
         output=labels.Labels().translate(input)
 
@@ -376,8 +353,8 @@ class TestLabels(unittest.TestCase):
             "com.example.department=Finance",
             "com.example.label-with-empty-value",
         ]
-        expected_output="--label=[com.example.description:Accounting webapp," \
-                        "com.example.department:Finance,com.example.label-with-empty-value:]"
+        expected_output="--label=com.example.description:Accounting webapp " \
+                        "--label=com.example.department:Finance --label=com.example.label-with-empty-value:"
 
         output=labels.Labels().translate(input)
 
@@ -399,7 +376,7 @@ class TestLinks(unittest.TestCase):
     def test_coversion(self):
 
         input=["db", "db:database", "redis"]
-        expected_output="--link=[db,db:database,redis]"
+        expected_output="--link=db --link=db:database --link=redis"
 
         output=links.Links().translate(input)
 
@@ -558,7 +535,8 @@ class TestPorts(unittest.TestCase):
             "49100:22",
             "127.0.0.1:8001:8001",
         ]
-        expected_output="--publish=[3000,8000:8000,49100:22,127.0.0.1:8001:8001]"
+        expected_output="--publish=3000 --publish=8000:8000 --publish=49100:22 " \
+                        "--publish=127.0.0.1:8001:8001"
 
         output=ports.Ports().translate(input)
 
@@ -735,7 +713,8 @@ class TestVolumes(unittest.TestCase):
             "./cache:/tmp/cache",
             "~/configs:/etc/configs/:ro",
         ]
-        expected_output="--volume=[/var/lib/mysql,./cache:/tmp/cache,~/configs:/etc/configs/:ro]"
+        expected_output="--volume=/var/lib/mysql --volume=./cache:/tmp/cache " \
+                        "--volume=~/configs:/etc/configs/:ro"
 
         output=volumes.Volumes().translate(input)
 
@@ -756,7 +735,7 @@ class TestVolumesFrom(unittest.TestCase):
     def test_coversion(self):
 
         input=["service_name", "container_name"]
-        expected_output="--volumes-from=[service_name,container_name]"
+        expected_output="--volumes-from=service_name --volumes-from=container_name"
 
         output=volumes_from.VolumesFrom().translate(input)
 

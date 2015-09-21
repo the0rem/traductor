@@ -14,4 +14,4 @@ class EnvFile(BaseTranslator):
                 return ""
             value = [value]
 
-        return "--env-file=[%s]" % ",".join(value)
+        return "--env-file=%s" % " --env-file=".join(value)

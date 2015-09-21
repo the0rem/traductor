@@ -12,4 +12,4 @@ class Devices(BaseTranslator):
         if type(value) is not list:
             return ""
 
-        return "--device=[%s]" % ",".join(value)
+        return "--device=%s" % " --device=".join(value)

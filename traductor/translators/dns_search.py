@@ -14,4 +14,4 @@ class DnsSearch(BaseTranslator):
                 return ""
             value = [value]
 
-        return "--dns-search=[%s]" % ",".join(value)
+        return "--dns-search=%s" % " --dns-search=".join(value)

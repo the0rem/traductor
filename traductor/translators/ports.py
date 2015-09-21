@@ -12,4 +12,4 @@ class Ports(BaseTranslator):
         if type(value) is not list:
             return ""
 
-        return "--publish=[%s]" % ",".join(value)
+        return "--publish=%s" % " --publish=".join(value)

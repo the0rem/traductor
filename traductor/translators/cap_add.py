@@ -12,4 +12,4 @@ class CapAdd(BaseTranslator):
         if type(value) is not list:
             return ""
 
-        return "--cap-add=[%s]" % ",".join(value)
+        return "--cap-add=%s" % " --cap-add=".join(value)

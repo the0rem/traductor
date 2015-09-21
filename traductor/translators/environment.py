@@ -25,4 +25,4 @@ class Environment(BaseTranslator):
                     env = "%s=" % env
                 environments.append(env.replace("=", ":"))
 
-        return "--env=[%s]" % ",".join(environments)
+        return "--env=%s" % " --env=".join(environments)

@@ -12,4 +12,4 @@ class Expose(BaseTranslator):
         if type(value) is not list:
             return ""
 
-        return "--expose=[%s]" % ",".join(value)
+        return "--expose=%s" % " --expose=".join(value)

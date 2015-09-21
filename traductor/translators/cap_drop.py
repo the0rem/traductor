@@ -12,4 +12,4 @@ class CapDrop(BaseTranslator):
         if type(value) is not list:
             return ""
 
-        return "--cap-drop=[%s]" % ",".join(value)
+        return "--cap-drop=%s" % " --cap-drop=".join(value)

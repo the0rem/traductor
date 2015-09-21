@@ -14,4 +14,4 @@ class Dns(BaseTranslator):
                 return ""
             value = [value]
 
-        return "--dns=[%s]" % ",".join(value)
+        return "--dns=%s" % " --dns=".join(value)

@@ -12,4 +12,4 @@ class VolumesFrom(BaseTranslator):
         if type(value) is not list:
             return ""
 
-        return "--volumes-from=[%s]" % ",".join(value)
+        return "--volumes-from=%s" % " --volumes-from=".join(value)
