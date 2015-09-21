@@ -37,4 +37,11 @@ To run the systemd service files you will need to install [systemd-docker](https
 
 ### Test
 
-	python -m unittest discover tests -v
+    $ python -m unittest discover tests -v
+
+#### Vagrant
+
+You can spin this bad boy up with a helloworld webapp on a CoreOS VM.
+
+    $ traductor -f examples/compose-helloworld.yml -d ./target/
+    $ vagrant up
