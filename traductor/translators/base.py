@@ -1,4 +1,3 @@
-from exceptions import NotImplementedError
 
 class BaseTranslator(object):
 
