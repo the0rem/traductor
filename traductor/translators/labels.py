@@ -1,4 +1,5 @@
 from traductor.translators.base import BaseTranslator
+import six
 
 class Labels(BaseTranslator):
     """
@@ -15,7 +16,7 @@ class Labels(BaseTranslator):
         labels = []
 
         if type(value) is dict:
-            for env_key, env_val in value.iteritems():
+            for env_key, env_val in six.iteritems(value):
                 labels.append("%s:%s" % (env_key, env_val,))
 
         if type(value) is list:

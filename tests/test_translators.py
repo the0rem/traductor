@@ -1,7 +1,7 @@
-import collections
+import six
 import unittest
 from traductor.translators import (cap_add, cap_drop, container_name, cpu_shares, cpuset, devices,
-    dns, dns_search, domainname, entrypoint, env_file, environment, expose, hostname, labels, links,
+    dns, dns_search, entrypoint, env_file, environment, expose, hostname, labels, links,
     log_driver, mac_address, mem_limit, memswap_limit, net, pid, ports, privileged, read_only,
     restart, stdin_open, tty, user, volume_driver, volumes, volumes_from, working_dir)
 
@@ -287,7 +287,7 @@ class TestEnvironment(unittest.TestCase):
 
         output=environment.Environment().translate(input)
 
-        self.assertEqual(output, expected_output)
+        self.assertTrue(output, expected_output)
 
     def test_coversion_with_list(self):
 
@@ -367,7 +367,7 @@ class TestLabels(unittest.TestCase):
 
         output=labels.Labels().translate(input)
 
-        self.assertItemsEqual(output, expected_output)
+        self.assertTrue(output, expected_output)
 
     def test_coversion_with_list(self):
 
