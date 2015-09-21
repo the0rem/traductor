@@ -5,29 +5,42 @@ from __future__ import print_function
 import os
 import sys
 import yaml
+import errno
 import jinja2
 import argparse
 import importlib
+
+def mkdir_p(path):
+    """
+
+    """
+    try:
+        os.makedirs(path)
+    except OSError as exc: # Python >2.5
+        if exc.errno == errno.EEXIST and os.path.isdir(path):
+            pass
+        else: raise
+
+
+def underscore_to_camelcase(value):
+    """
+    Translate a snake_case to CamelCase
+    """
+    def upperfirst(x):
+        return x[0].upper() + x[1:]
+    def camelcase():
+        yield str.lower
+        while True:
+            yield str.capitalize
+    c = camelcase()
+    return upperfirst("".join(c.next()(x) if x else '_' for x in value.split("_")))
+
 
 class Traductor(object):
     """
     Handles logic for translating docker-compose yaml files to systemd services
     """
-    def underscore_to_camelcase(self, value):
-        """
-        Translate a snake_case to CamelCase
-        """
-        def upperfirst(x):
-            return x[0].upper() + x[1:]
-        def camelcase():
-            yield str.lower
-            while True:
-                yield str.capitalize
-        c = camelcase()
-        return upperfirst("".join(c.next()(x) if x else '_' for x in value.split("_")))
-
-
-    def translate(self, files):
+    def translate(self, files, destination):
         """
 
         """
@@ -36,7 +49,7 @@ class Traductor(object):
         for service_name, service_specs in docker_services.iteritems():
 
             template_vars = self._translate_to_run_template_vars(service_name=service_name, service_specs=service_specs)
-            generated_template = self._generate_service(service_name=service_name, template_vars=template_vars)
+            generated_template = self._generate_service(service_name=service_name, template_vars=template_vars, destination_folder = destination)
 
             print(generated_template)
 
@@ -89,7 +102,7 @@ class Traductor(object):
 
             try:
                 module = importlib.import_module('traductor.translators.%s' % attr_name)
-                translator = getattr(module, self.underscore_to_camelcase(attr_name))
+                translator = getattr(module, underscore_to_camelcase(attr_name))
                 translator = translator()
             except AttributeError:
                 print("The docker-compose command \"%s\" is either not valid or is not " +
@@ -101,8 +114,8 @@ class Traductor(object):
 
         return {
             "service": {
-                "name": self.underscore_to_camelcase(service_name),
-                "description": "% service" % self.underscore_to_camelcase(service_name),
+                "name": underscore_to_camelcase(service_name),
+                "description": "% service" % underscore_to_camelcase(service_name),
                 "image": image,
                 "options": options,
                 "command": command,
@@ -110,7 +123,7 @@ class Traductor(object):
         }
 
 
-    def _generate_service(self, service_name, template_vars):
+    def _generate_service(self, service_name, template_vars, destination_folder):
         """
 
         """
@@ -123,8 +136,11 @@ class Traductor(object):
         template = template_env.get_template(template_file)
         output_text = template.render(template_vars)
 
+        # Ensure destination folder exists
+        mkdir_p(destination_folder)
+
         # Use print to send generated template to file
-        print(output_text, file=open("%s.service" % service_name, "w"))
+        print(output_text, file=open(os.path.join(destination_folder, "%s.service" % service_name), "w"))
 
         return output_text
 
@@ -142,17 +158,28 @@ class Cli(object):
                                                      " manage service files (systemd currently supported).")
 
         parser.add_argument(
+            '-d',
+            '--dest',
+            dest='dest',
+            default='./',
+            help='Destination for generated systemd service files (default: ./)',
+        )
+
+        parser.add_argument(
             '-f',
             '--file',
             dest='file',
+            action='append',
             help='Specify docker-compose files (default: docker-compose.yml)',
-            default='docker-compose.yml',
         )
 
         # Get cli arguments
         args = parser.parse_args()
 
-        Traductor().translate(files=[args.file])
+        if not args.file:
+            args.file = ['docker-compose.yml']
+
+        Traductor().translate(files=args.file, destination=args.dest)
 
 
 if __name__ == "__main__":
