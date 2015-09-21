@@ -50,8 +50,8 @@ You can spin this bad boy up with a helloworld webapp on a CoreOS VM.
 License and Authors
 -------------------
 
-- Author: Shaun Smekel
 - Author: Chris Fordham
+- Author: Shaun Smekel
 - Author: Toby Harris
 
 ```text
