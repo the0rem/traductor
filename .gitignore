@@ -62,3 +62,5 @@ target/
 
 # docker-compose.yml
 /docker-compose.yml
+
+/.vagrant/
