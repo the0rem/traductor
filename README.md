@@ -1,6 +1,6 @@
 # Traductor
 
-A translator for docker-compose YAML files into process manager launch files (systemd supported so far).
+A tool for translating docker-compose YAML files into process manager launch files (systemd supported so far).
 
 This helps support running docker containers as services under the OS' process manager (such as systemd).
 This can extend into being able to package docker containers as rpms for install.
