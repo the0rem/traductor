@@ -13,9 +13,9 @@ v1
 - All known systemd DK Keys are supported
 - Working systemd Unit File
 - Using [Jinja2](http://jinja.pocoo.org/) for process manager template file generation
+- Multiple docker-compose YAML files parsed at once
 
 v2
-- Multiple YAML files parsed at once
 - Inject systemd files into the container
 - Templated input
 - Support for generating service files for other process managers
