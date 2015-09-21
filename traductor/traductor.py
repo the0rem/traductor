@@ -12,7 +12,7 @@ import importlib
 
 def mkdir_p(path):
     """
-
+    Create a directory similar to mkdir -p
     """
     try:
         os.makedirs(path)
@@ -56,7 +56,7 @@ class Traductor(object):
 
     def _parse_yaml_from_files(self, files):
         """
-
+        Convert the given docker-compose files into python objects
         """
         docker_services = {}
 
@@ -79,7 +79,7 @@ class Traductor(object):
 
     def _translate_to_run_template_vars(self, service_name, service_specs):
         """
-
+        Translate each docker-compose service into docker run cli command
         """
         image = ""
         options = ""
@@ -115,7 +115,7 @@ class Traductor(object):
         return {
             "service": {
                 "name": underscore_to_camelcase(service_name),
-                "description": "% service" % underscore_to_camelcase(service_name),
+                "description": "%s service" % service_name,
                 "image": image,
                 "options": options,
                 "command": command,
@@ -125,7 +125,7 @@ class Traductor(object):
 
     def _generate_service(self, service_name, template_vars, destination_folder):
         """
-
+        Create a systemd service file using template vars
         """
         # Build the systemd service file using Jinja2
         template_loader = jinja2.FileSystemLoader(searchpath="/")
